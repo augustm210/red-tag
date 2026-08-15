@@ -2,12 +2,13 @@
 
 ## Working positioning
 
-Red Tag is an autonomous incident response operator for solo founders and small
-engineering teams that cannot staff a 24/7 SRE rotation.
+Red Tag is a safety-first background operations agent. It detects an operational
+problem, gathers evidence, chooses the smallest reversible mitigation, executes
+through an exactly-once safety boundary, verifies recovery, and leaves a complete
+audit trail.
 
-It detects an incident, gathers evidence, chooses the smallest reversible
-mitigation, executes through an exactly-once safety boundary, verifies recovery,
-and leaves a complete audit trail.
+The original 24/7 SRE story is rejected: the entrant confirmed on 2026-08-15
+that it is not a personal experience. It must not appear in submission material.
 
 ## Primary contest category
 
@@ -26,21 +27,25 @@ It would require a broader enterprise agent catalog, long-term institutional
 memory, cross-department governance, and additional platform services. Those
 features would dilute the proof-of-action demo during the remaining build time.
 
-## User and friction
+## BYOF decision gate
 
-Primary user: a solo founder or a small team member who is responsible for an
-online service but cannot continuously watch alerts.
+Taskmaster judging explicitly rewards a unique personal friction. No final
+product story may be locked until the entrant confirms it as truthful.
 
-Friction:
+Strong current candidate: recurring Windows disk-pressure diagnosis and safe
+cleanup. The workflow would:
 
-- incidents arrive while the operator is asleep or focused elsewhere;
-- diagnosis is spread across alerts, deploy history, and service telemetry;
-- retrying automation can repeat destructive or costly actions;
-- existing copilots often recommend steps but do not safely execute them;
-- after recovery, the operator lacks a trustworthy timeline of what happened.
+- monitor free space and start in the background at a critical threshold;
+- attribute growth across temporary files, package caches, Docker/WSL virtual
+  disks, and uninstalled-application residue;
+- distinguish regenerable cache from user data and required Docker volumes;
+- execute only confirmed-safe cleanup actions through idempotency claims;
+- require approval for user data, volumes, system files, or unknown targets;
+- prove before, after, freed space, remaining large consumers, and every action.
 
-The submission must not claim that this is the entrant's personal experience
-until the entrant confirms a truthful first-hand story.
+This candidate reuses Red Tag's existing incident, evidence, policy, action
+ledger, and duplicate-blocking architecture. It still requires explicit entrant
+confirmation before becoming the submission story.
 
 ## Product twist
 
@@ -50,14 +55,13 @@ delivered more than once, but a real mitigation is claimed once and evidenced.
 
 ## Four-minute proof story
 
-1. A deployment causes checkout latency while the operator is unavailable.
-2. A real background event creates an incident; no chat prompt is used.
-3. ADK specialists produce evidence, hypothesis, reversible plan, and decision.
-4. Red Tag performs a real safe rollback or Cloud Run revision traffic change.
-5. Health checks prove recovery and Firestore records the action and timeline.
-6. The same Pub/Sub message is delivered again; the UI shows `DUPLICATE BLOCKED`
-   and proves the action count remains one.
-7. A dangerous action is attempted and stops at the human approval boundary.
+1. A real background threshold creates an incident; no chat prompt is used.
+2. ADK specialists produce evidence, hypothesis, reversible plan, and decision.
+3. Red Tag performs a real, safe, measurable operational action.
+4. A post-action probe proves recovery and Firestore records the full timeline.
+5. The same event is delivered again; the UI shows `DUPLICATE BLOCKED` and
+   proves the action count remains one.
+6. A dangerous action is attempted and stops at the human approval boundary.
 
 ## Non-goals before submission
 

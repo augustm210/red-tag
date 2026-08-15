@@ -15,6 +15,7 @@ not evidence.
 - [x] Gemini 3.5 or newer selected (`gemini-3.6-flash`).
 - [x] Google Agent Framework selected (Google ADK 2.7 Workflow).
 - [x] Google Cloud infrastructure designed (Cloud Run, Firestore, Pub/Sub).
+- [x] Dedicated contest project created (`red-tag-agentic-2026-0815`).
 - [x] English-language application path exists.
 - [ ] Public, reproducible GitHub repository.
 - [ ] Public working deployment that judges can use without payment.

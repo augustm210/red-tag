@@ -3,7 +3,7 @@
 - [x] gcloud installed
 - [x] Logged into Google account
 - [ ] Billing enabled
-- [ ] Project selected
+- [x] Project selected (`red-tag-agentic-2026-0815`)
 - [ ] APIs enabled
 - [ ] Firestore created
 - [ ] Pub/Sub topics created

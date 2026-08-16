@@ -14,3 +14,6 @@ build/
 artifacts/*
 !artifacts/judge-console-proof-v2.png
 !artifacts/local-executor-proof.json
+!artifacts/devpost-thumbnail.png
+!artifacts/architecture.svg
+!artifacts/architecture.png

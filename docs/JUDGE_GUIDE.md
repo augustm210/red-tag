@@ -53,4 +53,5 @@ rejection, and unsupported local actions.
 - [`DEPLOYMENT_EVIDENCE.md`](DEPLOYMENT_EVIDENCE.md)
 - [`local-executor-proof.json`](../artifacts/local-executor-proof.json)
 - [`judge-console-proof-v2.png`](../artifacts/judge-console-proof-v2.png)
+- [`architecture.svg`](../artifacts/architecture.svg)
 - [`ARCHITECTURE.md`](ARCHITECTURE.md)

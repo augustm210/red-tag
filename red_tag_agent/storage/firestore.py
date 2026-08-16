@@ -60,6 +60,10 @@ class FirestoreIncidentRepository:
     def claim_delivery(self, incident_id: str, delivery_id: str) -> bool:
         return self._claim_once(f"delivery:{incident_id}:{delivery_id}", incident_id)
 
+    def release_delivery(self, incident_id: str, delivery_id: str) -> None:
+        key = f"delivery:{incident_id}:{delivery_id}".replace("/", "_")
+        self._idempotency.document(key).delete()
+
     def claim_action(self, incident_id: str, action: ActionRecord) -> bool:
         claim_ref = self._idempotency.document(f"action:{action.idempotency_key}")
         action_ref = (

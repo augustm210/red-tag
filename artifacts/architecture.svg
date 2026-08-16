@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#11100e"/><stop offset="1" stop-color="#24211c"/>
+    </linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="12" stdDeviation="18" flood-opacity=".28"/></filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#f04438"/>
+    </marker>
+    <style>
+      .k{font:700 22px ui-monospace,monospace;letter-spacing:2px;fill:#f04438}.h{font:900 54px Inter,Arial,sans-serif;fill:#f3efe6}.s{font:24px Inter,Arial,sans-serif;fill:#bcb5aa}.box{fill:#f3efe6;stroke:#c8beae;stroke-width:2;rx:18;filter:url(#shadow)}.t{font:800 25px Inter,Arial,sans-serif;fill:#11100e}.ts{font:800 22px Inter,Arial,sans-serif;fill:#11100e}.d{font:19px Inter,Arial,sans-serif;fill:#655f55}.a{stroke:#f04438;stroke-width:5;fill:none;marker-end:url(#arrow)}.agent{fill:#fff8ef;stroke:#f04438;stroke-width:2;rx:12}.at{font:700 18px Inter,Arial,sans-serif;fill:#11100e}.proof{fill:#193d28;stroke:#54d579;stroke-width:2;rx:15}.pt{font:700 20px ui-monospace,monospace;fill:#bff7c9}
+    </style>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0H0V50" fill="none" stroke="#ffffff" stroke-opacity=".045"/></pattern>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/><rect width="1600" height="1000" fill="url(#grid)"/>
+  <rect x="74" y="62" width="170" height="62" rx="8" fill="#f04438" transform="rotate(-2 74 62)"/><text x="105" y="104" class="h" font-size="34">RED TAG</text>
+  <text x="74" y="190" class="h">Reason freely. Act exactly once.</text>
+  <text x="74" y="235" class="s">Background disk-pressure remediation on Google ADK + Google Cloud</text>
+
+  <rect class="box" x="70" y="315" width="250" height="150"/><text class="ts" x="94" y="370">Threshold monitor</text><text class="d" x="105" y="410">Windows disk evidence</text><text class="d" x="105" y="438">No chat prompt</text>
+  <path class="a" d="M320 390H405"/>
+  <rect class="box" x="415" y="315" width="235" height="150"/><text class="t" x="450" y="370">Cloud Run API</text><text class="d" x="450" y="410">Incident + audit event</text><text class="d" x="450" y="438">Public judge console</text>
+  <path class="a" d="M650 390H735"/>
+  <rect class="box" x="745" y="315" width="235" height="150"/><text class="t" x="792" y="370">Pub/Sub</text><text class="d" x="780" y="410">Authenticated OIDC</text><text class="d" x="780" y="438">Retry + dead letter</text>
+  <path class="a" d="M980 390H1065"/>
+  <rect class="box" x="1075" y="315" width="450" height="150"/><text class="t" x="1110" y="370">Private Cloud Run worker</text><text class="d" x="1110" y="410">Gemini 3.6 Flash · Vertex AI global</text><text class="d" x="1110" y="438">Google ADK sequential workflow</text>
+
+  <text class="k" x="70" y="535">FIVE SPECIALISTS</text>
+  <rect class="agent" x="70" y="565" width="260" height="75"/><text class="at" x="101" y="610">1 · INTAKE</text>
+  <path class="a" d="M330 603H365"/>
+  <rect class="agent" x="375" y="565" width="260" height="75"/><text class="at" x="405" y="610">2 · INVESTIGATOR</text>
+  <path class="a" d="M635 603H670"/>
+  <rect class="agent" x="680" y="565" width="260" height="75"/><text class="at" x="710" y="610">3 · PLANNER</text>
+  <path class="a" d="M940 603H975"/>
+  <rect class="agent" x="985" y="565" width="260" height="75"/><text class="at" x="1015" y="610">4 · EXECUTOR</text>
+  <path class="a" d="M1245 603H1280"/>
+  <rect class="agent" x="1290" y="565" width="235" height="75"/><text class="at" x="1318" y="610">5 · VERIFIER</text>
+
+  <rect x="70" y="705" width="935" height="165" rx="18" fill="#371917" stroke="#f04438" stroke-width="3" filter="url(#shadow)"/>
+  <text class="k" x="105" y="755">DETERMINISTIC SAFETY BOUNDARY</text>
+  <text class="s" x="105" y="802">Allowlist · SEV1 approval · marked-path validation · SHA-256 action key</text>
+  <text class="s" x="105" y="842">Firestore transaction claims delivery and action before any mutation</text>
+  <path class="a" d="M1005 788H1075"/>
+  <rect class="proof" x="1085" y="705" width="440" height="165"/>
+  <text class="pt" x="1122" y="755">PROOF OF RECOVERY</text>
+  <text class="pt" x="1122" y="795">67,108,864 BYTES FREED</text>
+  <text class="pt" x="1122" y="835">REPLAY BLOCKED · ACTIONS = 1</text>
+
+  <text class="s" x="70" y="944">Models may retry. The operational action cannot.</text>
+  <text class="k" x="1015" y="944">CLOUD RUN · FIRESTORE · PUB/SUB</text>
+</svg>

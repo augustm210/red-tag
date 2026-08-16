@@ -9,6 +9,8 @@ https://red-tag-api-ododbqusqq-uc.a.run.app
 
 ![Red Tag Judge Console](artifacts/judge-console-proof-v2.png)
 
+![Red Tag Architecture](artifacts/architecture.svg)
+
 The project is intentionally built around one hard reliability promise:
 
 > A retried event may repeat the reasoning, but it must never repeat an

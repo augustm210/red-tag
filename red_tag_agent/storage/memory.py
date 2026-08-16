@@ -57,6 +57,11 @@ class InMemoryIncidentRepository:
             self._deliveries.add(key)
             return True
 
+    def release_delivery(self, incident_id: str, delivery_id: str) -> None:
+        with self._lock:
+            self._require(incident_id)
+            self._deliveries.discard((incident_id, delivery_id))
+
     def claim_action(self, incident_id: str, action: ActionRecord) -> bool:
         with self._lock:
             incident = self._require(incident_id)

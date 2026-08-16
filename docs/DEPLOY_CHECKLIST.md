@@ -2,16 +2,16 @@
 
 - [x] gcloud installed
 - [x] Logged into Google account
-- [ ] Billing enabled
+- [x] Billing enabled
 - [x] Project selected (`red-tag-agentic-2026-0815`)
-- [ ] APIs enabled
-- [ ] Firestore created
-- [ ] Pub/Sub topics created
-- [ ] Service accounts created
-- [ ] Cloud Run API deployed
-- [ ] Cloud Run Worker deployed
-- [ ] Pub/Sub push authentication tested
-- [ ] Duplicate action test passed
+- [x] APIs enabled
+- [x] Firestore created
+- [x] Pub/Sub topics created
+- [x] Service accounts created
+- [x] Cloud Run API deployed
+- [x] Cloud Run Worker deployed
+- [x] Pub/Sub push authentication tested
+- [x] Duplicate action test passed in cloud
 - [ ] DLQ test passed
 
 ## Local evidence
@@ -24,4 +24,6 @@
 - [x] High-risk action gate test passed
 - [x] Duplicate delivery test passed
 - [x] Duplicate action test passed
+- [x] Vertex AI live call returned `RED_TAG_VERTEX_OK`
+- [x] Five-node ADK live run returned all five agent authors
 - [ ] Docker Desktop engine running (not required when Cloud Build builds the image)

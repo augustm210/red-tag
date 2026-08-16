@@ -16,12 +16,18 @@ from red_tag_agent.models import (
 from red_tag_agent.processor import IncidentProcessor
 from red_tag_agent.storage.base import IncidentRepository
 from services.api.dependencies import get_dispatcher, get_processor, get_repository
+from services.api.ui import judge_console
 
 app = FastAPI(
     title="Red Tag Incident Command API",
     version="0.1.0",
     description="Evidence-first, idempotent multi-agent incident response.",
 )
+
+
+@app.get("/", include_in_schema=False)
+def home():
+    return judge_console()
 
 
 def require_api_role() -> None:
@@ -36,6 +42,11 @@ def require_worker_role() -> None:
 
 @app.get("/healthz")
 def healthz() -> dict[str, str]:
+    return {"status": "ok"}
+
+
+@app.get("/health")
+def health() -> dict[str, str]:
     return {"status": "ok"}
 
 
@@ -91,6 +102,26 @@ def get_incident(
     if incident is None:
         raise HTTPException(status_code=404, detail="Incident not found")
     return incident
+
+
+@app.post("/v1/demo/incidents/{incident_id}/replay", response_model=ProcessResult)
+def replay_incident_delivery(
+    incident_id: str,
+    _: None = Depends(require_api_role),
+    repository: IncidentRepository = Depends(get_repository),
+    processor: IncidentProcessor = Depends(get_processor),
+) -> ProcessResult:
+    incident = repository.get(incident_id)
+    if incident is None:
+        raise HTTPException(status_code=404, detail="Incident not found")
+    dispatched = next(
+        (event for event in incident.events if event.event_type == "incident_dispatched"),
+        None,
+    )
+    delivery_id = dispatched.data.get("message_id") if dispatched else None
+    if not delivery_id:
+        raise HTTPException(status_code=409, detail="No delivery ID is available for replay")
+    return processor.process(incident_id, str(delivery_id))
 
 
 @app.post("/v1/incidents/{incident_id}/process", response_model=ProcessResult)

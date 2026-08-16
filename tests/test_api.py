@@ -90,3 +90,38 @@ def test_unknown_action_is_never_executed() -> None:
     )
     assert result.json()["outcome"] == "human_approval_required"
     assert result.json()["action"]["status"] == "awaiting_approval"
+
+
+def test_judge_console_and_duplicate_replay() -> None:
+    reset_dependencies()
+    client = TestClient(app)
+    home = client.get("/")
+    assert home.status_code == 200
+    assert "JUDGE PROOF CONSOLE" in home.text
+
+    created = client.post(
+        "/v1/incidents",
+        json={
+            "title": "Managed cache pressure detected",
+            "description": "The managed cache crossed the configured safe threshold.",
+            "service": "windows-disk",
+            "severity": "SEV2",
+            "requested_action": "clear_cache",
+        },
+    ).json()
+    delivery_id = next(
+        event["data"]["message_id"]
+        for event in created["events"]
+        if event["event_type"] == "incident_dispatched"
+    )
+    first = client.post(
+        f"/v1/incidents/{created['id']}/process",
+        json={"delivery_id": delivery_id},
+    )
+    assert first.json()["outcome"] == "closed"
+
+    replay = client.post(f"/v1/demo/incidents/{created['id']}/replay")
+    assert replay.status_code == 200
+    assert replay.json()["outcome"] == "duplicate_delivery_blocked"
+    stored = client.get(f"/v1/incidents/{created['id']}").json()
+    assert len(stored["actions"]) == 1

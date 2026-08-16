@@ -14,11 +14,17 @@ Public API (Cloud Run)
 1. Intake Agent normalizes severity, scope, symptoms, and missing facts.
 2. Investigator Agent separates evidence from hypotheses and ranks causes.
 3. Resolution Planner proposes the smallest reversible mitigation.
-4. Action Executor applies policy and submits an idempotent action claim.
-5. Closure Verifier requires action evidence before closing the incident.
+4. Action Executor Agent reviews the plan and proposes an action; it cannot run it.
+5. The deterministic safety boundary applies policy, claims the idempotency key,
+   and records completion.
+6. Closure Verifier runs after execution and receives the durable action record.
 
-The LLM never owns the execution guarantee. The deterministic execution boundary
-owns policy, idempotency, and the action ledger.
+There are five Gemini/ADK specialists. The deterministic safety boundary between
+the fourth and fifth specialists is deliberately not an LLM agent.
+
+The LLM never owns the execution guarantee or claims success before evidence.
+The deterministic execution boundary owns policy, idempotency, and the action
+ledger; the final LLM node only interprets the post-execution record.
 
 ## Reliability contract
 

@@ -14,7 +14,9 @@ class Settings(BaseSettings):
     agent_mode: Literal["local", "adk"] = "local"
     model: str = "gemini-3.6-flash"
     google_cloud_project: str | None = None
-    google_cloud_location: str = "us-central1"
+    # Gemini 3.6 Flash is served from the global model endpoint. This is
+    # intentionally independent from the Cloud Run deployment region.
+    google_cloud_location: str = "global"
     incident_topic: str = "red-tag-incident-created"
 
 

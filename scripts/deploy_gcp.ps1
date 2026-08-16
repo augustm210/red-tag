@@ -5,7 +5,8 @@ param(
     [string]$ProjectId,
 
     [string]$Region = 'us-central1',
-    [string]$Model = 'gemini-3.6-flash'
+    [string]$Model = 'gemini-3.6-flash',
+    [string]$ModelLocation = 'global'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -90,7 +91,7 @@ foreach ($Topic in @($IncidentTopic, $DeadLetterTopic)) {
 
 Invoke-Gcloud builds submit --tag $Image .
 
-$CommonEnv = "RED_TAG_ENVIRONMENT=cloud,RED_TAG_REPOSITORY_BACKEND=firestore,RED_TAG_GOOGLE_CLOUD_PROJECT=$ProjectId,GOOGLE_CLOUD_PROJECT=$ProjectId,GOOGLE_CLOUD_LOCATION=$Region,GOOGLE_GENAI_USE_VERTEXAI=true,RED_TAG_MODEL=$Model"
+$CommonEnv = "RED_TAG_ENVIRONMENT=cloud,RED_TAG_REPOSITORY_BACKEND=firestore,RED_TAG_GOOGLE_CLOUD_PROJECT=$ProjectId,GOOGLE_CLOUD_PROJECT=$ProjectId,RED_TAG_GOOGLE_CLOUD_LOCATION=$ModelLocation,GOOGLE_CLOUD_LOCATION=$ModelLocation,GOOGLE_GENAI_USE_VERTEXAI=true,RED_TAG_MODEL=$Model"
 
 Invoke-Gcloud run deploy $WorkerService `
     --image $Image `
@@ -122,6 +123,22 @@ Invoke-Gcloud run services add-iam-policy-binding $WorkerService `
     --member "serviceAccount:red-tag-pubsub@$ProjectId.iam.gserviceaccount.com" `
     --role roles/run.invoker
 
+# Pub/Sub's managed service agent must be able to mint the OIDC token used to
+# invoke the private worker. The same agent also needs explicit DLQ permissions
+# for dead-letter forwarding to function.
+$ProjectNumber = & $Gcloud projects describe $ProjectId --format='value(projectNumber)'
+if ($LASTEXITCODE -ne 0 -or -not $ProjectNumber) {
+    throw 'Unable to resolve project number for Pub/Sub service agent IAM.'
+}
+$PubSubServiceAgent = "service-$ProjectNumber@gcp-sa-pubsub.iam.gserviceaccount.com"
+Invoke-Gcloud iam service-accounts add-iam-policy-binding `
+    "red-tag-pubsub@$ProjectId.iam.gserviceaccount.com" `
+    --member "serviceAccount:$PubSubServiceAgent" `
+    --role roles/iam.serviceAccountTokenCreator
+Invoke-Gcloud pubsub topics add-iam-policy-binding $DeadLetterTopic `
+    --member "serviceAccount:$PubSubServiceAgent" `
+    --role roles/pubsub.publisher
+
 & $Gcloud pubsub subscriptions describe $Subscription *> $null
 if ($LASTEXITCODE -ne 0) {
     Invoke-Gcloud pubsub subscriptions create $Subscription `
@@ -132,6 +149,10 @@ if ($LASTEXITCODE -ne 0) {
         --dead-letter-topic $DeadLetterTopic `
         --max-delivery-attempts 5
 }
+
+Invoke-Gcloud pubsub subscriptions add-iam-policy-binding $Subscription `
+    --member "serviceAccount:$PubSubServiceAgent" `
+    --role roles/pubsub.subscriber
 
 $ApiUrl = & $Gcloud run services describe $ApiService --region $Region --format='value(status.url)'
 Write-Host "Red Tag API: $ApiUrl"

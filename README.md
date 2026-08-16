@@ -4,6 +4,9 @@ Red Tag is a safety-first incident response agent for Google Cloud. It turns an
 incident report into an evidence-backed investigation, a constrained action
 plan, an idempotent execution, and a verified closure record.
 
+**Live Judge Console:**
+https://red-tag-api-ododbqusqq-uc.a.run.app
+
 The project is intentionally built around one hard reliability promise:
 
 > A retried event may repeat the reasoning, but it must never repeat an
@@ -46,7 +49,8 @@ Invoke-RestMethod -Method Post `
 
 The default `local` mode is deterministic and does not call a model. For a real
 ADK/Gemini run, configure the Google Cloud variables in `.env` and set
-`RED_TAG_AGENT_MODE=adk`.
+`RED_TAG_AGENT_MODE=adk`. Gemini 3.6 Flash uses the `global` model endpoint;
+that setting is independent from the Cloud Run deployment region.
 
 ## Tests
 
@@ -66,4 +70,5 @@ billing choice are confirmed.
 See [architecture](docs/ARCHITECTURE.md) and the
 [deployment checklist](docs/DEPLOY_CHECKLIST.md). Competition delivery is
 governed by the [championship scorecard](docs/CHAMPIONSHIP_SCORECARD.md) and
-[product brief](docs/PRODUCT_BRIEF.md).
+[product brief](docs/PRODUCT_BRIEF.md). Verified cloud results are recorded in
+[deployment evidence](docs/DEPLOYMENT_EVIDENCE.md).

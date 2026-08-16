@@ -63,6 +63,16 @@ class IncidentProcessor:
             )
 
         action = self._executor.execute(incident, incident.requested_action or "restart")
+        verification = self._workflow.verify(incident, action)
+        summaries.append(f"{verification.stage}: {verification.summary}")
+        self._repository.append_event(
+            AuditEvent(
+                incident_id=incident_id,
+                event_type="agent_stage_completed",
+                actor=verification.stage,
+                data={"summary": verification.summary},
+            )
+        )
         summary = " | ".join(summaries)
         if action.status == "awaiting_approval":
             final_status = IncidentStatus.AWAITING_APPROVAL

@@ -12,13 +12,13 @@ not evidence.
 ## Stage One: mandatory pass/fail
 
 - [x] Project was created during the submission period.
-- [x] Gemini 3.5 or newer selected (`gemini-3.6-flash`).
+- [x] Gemini 3.5 or newer selected and live-tested (`gemini-3.6-flash`, `global`).
 - [x] Google Agent Framework selected (Google ADK 2.7 Workflow).
 - [x] Google Cloud infrastructure designed (Cloud Run, Firestore, Pub/Sub).
 - [x] Dedicated contest project created (`red-tag-agentic-2026-0815`).
 - [x] English-language application path exists.
 - [ ] Public, reproducible GitHub repository.
-- [ ] Public working deployment that judges can use without payment.
+- [x] Public working deployment that judges can use without payment.
 - [ ] Four-minute-or-shorter English demonstration video.
 - [ ] Testing instructions and any required test credentials.
 - [ ] All third-party assets, data, and libraries have documented licenses.
@@ -72,7 +72,7 @@ Target score: 5/5.
 - [x] Firestore transaction owns the durable action claim.
 - [x] Authenticated Pub/Sub push is represented in deployment automation.
 - [x] Dead-letter topic is represented in deployment automation.
-- [ ] Cloud deployment passes from a clean checkout.
+- [x] First Cloud deployment and authenticated end-to-end smoke test passed.
 - [ ] Least-privilege IAM is verified in the deployed project.
 - [ ] Dead-letter recorder and replay workflow are implemented.
 - [ ] Agent timeout, malformed output, loop, and hallucination recovery are tested.

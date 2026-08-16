@@ -53,8 +53,9 @@ verifier_agent = LlmAgent(
     name="closure_verifier",
     model=settings.model,
     instruction=(
-        "Verify {execution_decision} against the available evidence. State "
-        "whether the incident may close and list remaining uncertainty."
+        "Verify the post-execution record supplied in the user message against "
+        "the available evidence. State whether the scoped incident may close "
+        "and list remaining uncertainty. Never invent execution evidence."
     ),
     output_key="closure_report",
     mode="single_turn",
@@ -62,12 +63,17 @@ verifier_agent = LlmAgent(
 
 root_agent = Workflow(
     name="red_tag_incident_workflow",
-    description="Evidence-first, safety-gated incident response workflow.",
+    description="Evidence-first reasoning before the deterministic execution boundary.",
     edges=[
         (START, intake_agent),
         (intake_agent, investigator_agent),
         (investigator_agent, planner_agent),
         (planner_agent, executor_agent),
-        (executor_agent, verifier_agent),
     ],
+)
+
+verification_root_agent = Workflow(
+    name="red_tag_post_execution_verification",
+    description="Verifies the durable action record after deterministic execution.",
+    edges=[(START, verifier_agent)],
 )

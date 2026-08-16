@@ -57,8 +57,19 @@ worker. The result was:
 
 ## Honest limitation
 
-The current cloud action boundary uses the safe demo adapter. It proves policy,
-transactional claiming, audit, and duplicate blocking, but it does not yet
-delete local Windows cache files. The real managed-directory Windows executor
-and before/after disk measurement remain release blockers for the competition
-demo.
+The cloud action boundary intentionally uses the non-mutating safe demo adapter;
+a multi-tenant public Cloud Run service must not mutate a judge's computer. The
+separate Windows terminal proof now uses the same policy, processor, and
+idempotency contract with the real managed-directory adapter.
+
+Verified local run on 2026-08-16:
+
+- threshold: 32 MiB; measured cache: 64 MiB;
+- 64 files and 67,108,864 bytes removed;
+- post-action managed bytes: 0;
+- protected user-evidence file and safety marker preserved;
+- unmarked parent target rejected;
+- duplicate delivery outcome: `duplicate_delivery_blocked`;
+- final action count: 1.
+
+Raw evidence: [`artifacts/local-executor-proof.json`](../artifacts/local-executor-proof.json).

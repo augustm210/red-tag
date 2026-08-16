@@ -1,3 +1,5 @@
+from typing import Any
+
 from google.cloud import firestore
 
 from red_tag_agent.models import (
@@ -80,10 +82,21 @@ class FirestoreIncidentRepository:
 
         return claim(transaction)
 
-    def complete_action(self, incident_id: str, idempotency_key: str) -> ActionRecord:
+    def complete_action(
+        self,
+        incident_id: str,
+        idempotency_key: str,
+        evidence: dict[str, Any] | None = None,
+    ) -> ActionRecord:
         ref = self._incidents.document(incident_id).collection("actions").document(idempotency_key)
         completed_at = utc_now()
-        ref.update({"status": "completed", "completed_at": completed_at})
+        ref.update(
+            {
+                "status": "completed",
+                "completed_at": completed_at,
+                "evidence": evidence or {},
+            }
+        )
         return ActionRecord.model_validate(ref.get().to_dict())
 
     def _claim_once(self, key: str, incident_id: str) -> bool:

@@ -52,6 +52,7 @@ class ActionRecord(BaseModel):
     target: str
     status: str
     reason: str
+    evidence: dict[str, Any] = Field(default_factory=dict)
     created_at: datetime = Field(default_factory=utc_now)
     completed_at: datetime | None = None
 

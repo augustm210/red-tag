@@ -1,0 +1,51 @@
+{
+  "outcome": "closed",
+  "incident_id": "16cbeeec-2b11-4f53-a3f4-8bfaf9663342",
+  "trigger": {
+    "source": "windows-threshold-monitor",
+    "managed_cache_bytes": 67108864,
+    "threshold_bytes": 33554432
+  },
+  "action": {
+    "idempotency_key": "6d95d7305e28770bd42cf75bf8608aef",
+    "action": "clear_cache",
+    "target": "windows-disk",
+    "status": "completed",
+    "reason": "Action is allowlisted for this severity.",
+    "evidence": {
+      "adapter": "managed_directory_windows",
+      "verification_scope": "local_filesystem",
+      "managed_root": "E:\\工作\\red-tag-local-terminal-kit\\.red-tag-demo",
+      "managed_cache": "E:\\工作\\red-tag-local-terminal-kit\\.red-tag-demo\\cache",
+      "bytes_before": 67108864,
+      "bytes_after": 0,
+      "bytes_freed": 67108864,
+      "files_deleted": 64,
+      "volume_free_bytes_before": 996212633600,
+      "volume_free_bytes_after": 996279742464,
+      "marker_preserved": true,
+      "protected_files_preserved": [
+        "DO_NOT_DELETE-user-evidence.txt"
+      ],
+      "incident_id": "16cbeeec-2b11-4f53-a3f4-8bfaf9663342"
+    },
+    "created_at": "2026-08-16T05:12:43.316343Z",
+    "completed_at": "2026-08-16T05:12:43.399947Z"
+  },
+  "duplicate_delivery": {
+    "outcome": "duplicate_delivery_blocked",
+    "action_count": 1
+  },
+  "unsafe_parent_probe": "blocked: Missing trusted marker: E:\\工作\\red-tag-local-terminal-kit\\.red-tag-managed-cache.json",
+  "protected_file_exists": true,
+  "audit_event_types": [
+    "agent_stage_completed",
+    "agent_stage_completed",
+    "agent_stage_completed",
+    "agent_stage_completed",
+    "action_evidence_recorded",
+    "agent_stage_completed",
+    "incident_processing_completed",
+    "duplicate_delivery_blocked"
+  ]
+}

@@ -44,8 +44,9 @@ cleanup. The workflow would:
 - prove before, after, freed space, remaining large consumers, and every action.
 
 This candidate reuses Red Tag's existing incident, evidence, policy, action
-ledger, and duplicate-blocking architecture. It still requires explicit entrant
-confirmation before becoming the submission story.
+ledger, and duplicate-blocking architecture. It became the confirmed product
+story after the entrant authorized final execution and the machine supplied the
+measured C:/E: free-space evidence on 2026-08-16.
 
 ## Product twist
 

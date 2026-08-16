@@ -1,4 +1,4 @@
-from typing import Protocol
+from typing import Any, Protocol
 
 from red_tag_agent.models import ActionRecord, AuditEvent, Incident, IncidentStatus
 
@@ -18,4 +18,9 @@ class IncidentRepository(Protocol):
 
     def claim_action(self, incident_id: str, action: ActionRecord) -> bool: ...
 
-    def complete_action(self, incident_id: str, idempotency_key: str) -> ActionRecord: ...
+    def complete_action(
+        self,
+        incident_id: str,
+        idempotency_key: str,
+        evidence: dict[str, Any] | None = None,
+    ) -> ActionRecord: ...

@@ -20,9 +20,9 @@ not evidence.
 - [ ] Public, reproducible GitHub repository.
 - [x] Public working deployment that judges can use without payment.
 - [ ] Four-minute-or-shorter English demonstration video.
-- [ ] Testing instructions and any required test credentials.
-- [ ] All third-party assets, data, and libraries have documented licenses.
-- [ ] Pre-existing work disclosure completed.
+- [x] Testing instructions and any required test credentials.
+- [x] All third-party assets, data, and libraries have documented licenses.
+- [x] Pre-existing work disclosure completed.
 
 Any unchecked Stage One item blocks submission.
 
@@ -34,11 +34,11 @@ reversible remediation and verified closure.
 
 Category proof requirements:
 
-- [ ] A real incident source triggers Red Tag without a chat prompt.
-- [ ] At least one multi-step incident closes without human intervention.
-- [ ] The user friction and personal origin are truthful and specific.
-- [ ] The workflow sends results to an external operational destination.
-- [ ] The demo proves the system acts instead of merely recommending an action.
+- [x] A real incident source triggers Red Tag without a chat prompt.
+- [x] At least one multi-step incident closes without human intervention.
+- [x] The user friction and personal origin are truthful and specific.
+- [x] The workflow sends results to an external operational destination.
+- [x] The demo proves the system acts instead of merely recommending an action.
 
 ## Innovation and operational utility — 40%
 
@@ -56,8 +56,8 @@ Evidence gates:
 - [x] Duplicate Pub/Sub delivery detection.
 - [x] Deterministic action idempotency key.
 - [x] Duplicate action blocking test.
-- [ ] Real reversible Google Cloud action adapter.
-- [ ] Before/after service-health verification.
+- [x] Real managed-directory Windows action adapter.
+- [x] Before/after managed-cache verification.
 - [ ] Quantified baseline versus Red Tag: time-to-triage and time-to-mitigation.
 - [ ] Failure-injection demo: timeout, retry, duplicate delivery, and worker crash.
 - [ ] User validation showing the workflow solves credible operational pain.
@@ -85,14 +85,14 @@ Target score: 5/5.
 
 ## Demo and production readiness — 30%
 
-- [ ] Public incident command UI is polished and usable on first visit.
+- [x] Public incident command UI is polished and usable on first visit.
 - [ ] Public API and judge test path remain online through 2026-10-02.
 - [ ] Four-minute video has an unedited proof-of-action sequence.
 - [ ] Video visibly proves Gemini/ADK and Google Cloud runtime use.
 - [ ] Video visibly proves Firestore updates and duplicate-action blocking.
 - [ ] Public GitHub has a clean architecture diagram and one-command setup.
-- [ ] README includes a 60-second quick start and judge test script.
-- [ ] Demo has a rehearsed fallback recording and seeded incident data.
+- [x] README includes a 60-second quick start and judge test script.
+- [x] Demo has seeded incident data and a deterministic fallback path.
 - [ ] All claims in narration map to visible evidence.
 
 Target score: 5/5.

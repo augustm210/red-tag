@@ -1,5 +1,6 @@
 from copy import deepcopy
 from threading import RLock
+from typing import Any
 
 from red_tag_agent.models import (
     ActionRecord,
@@ -65,7 +66,12 @@ class InMemoryIncidentRepository:
             self._touch(incident)
             return True
 
-    def complete_action(self, incident_id: str, idempotency_key: str) -> ActionRecord:
+    def complete_action(
+        self,
+        incident_id: str,
+        idempotency_key: str,
+        evidence: dict[str, Any] | None = None,
+    ) -> ActionRecord:
         with self._lock:
             incident = self._require(incident_id)
             action = next(
@@ -75,6 +81,7 @@ class InMemoryIncidentRepository:
             if action is None:
                 raise KeyError(f"Action not found: {idempotency_key}")
             action.status = "completed"
+            action.evidence = deepcopy(evidence or {})
             action.completed_at = utc_now()
             self._touch(incident)
             return deepcopy(action)

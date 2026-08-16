@@ -7,6 +7,13 @@ Public API (Cloud Run)
   -> Google ADK sequential workflow
   -> Safety policy + idempotent action executor
   -> Firestore incident, evidence, action, and idempotency records
+
+Windows threshold proof (local terminal)
+  -> Marked sandbox measurement
+  -> Shared incident processor + safety policy
+  -> Managed-directory action adapter
+  -> Byte-level before/after evidence
+  -> Duplicate replay blocked by the shared action ledger
 ```
 
 ## Agent workflow
@@ -42,3 +49,12 @@ Local mode uses an in-memory repository and a deterministic workflow so safety
 tests run without credentials or model cost. Cloud mode uses Firestore, Pub/Sub,
 Vertex AI, and the ADK workflow. Both modes share the same models, policy, and
 execution contract.
+
+## Filesystem safety boundary
+
+The local adapter accepts exactly one manifest:
+`.red-tag-managed-cache.json` with schema `red-tag-managed-cache/v1`. It resolves
+the marked root, requires a real `cache` child, refuses linked directories and
+non-regular files, and verifies every resolved target stays below that child.
+Files next to `cache` are evidence, not deletion candidates. The parent path is
+probed during every proof run and must fail closed because it has no marker.

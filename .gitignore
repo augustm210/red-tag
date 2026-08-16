@@ -10,4 +10,7 @@ dist/
 build/
 *.egg-info/
 .google-agents-cli/
-artifacts/
+.red-tag-demo/
+artifacts/*
+!artifacts/judge-console-proof-v2.png
+!artifacts/local-executor-proof.json
